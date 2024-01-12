@@ -45,7 +45,7 @@ export default function KanbanBoard() {
       applications: [],
       title: "Rejected",
       icon: roundedRejected,
-      color: "#FFEAEA",
+      color: "bg-[#FFEAEA]",
       cta: collapse,
     },
     {
@@ -53,7 +53,7 @@ export default function KanbanBoard() {
       applications: [],
       title: "Applied",
       icon: roundedApplied,
-      color: "#E1E4E8",
+      color: "bg-[#E1E4E8]",
       cta: download,
     },
     {
@@ -61,7 +61,7 @@ export default function KanbanBoard() {
       applications: [],
       title: "Shortlisted",
       icon: roundedShortlisted,
-      color: "#E2F5EA",
+      color: "bg-[#E2F5EA]",
       cta: downloadGreen,
     },
   ]);
@@ -135,69 +135,74 @@ export default function KanbanBoard() {
     <>
       <DragDropContext onDragEnd={onDragEndHandler}>
         <div className="flex flex-wrap ">
-          {currentBoard?.map((section) => (
-            <Droppable key={section.id} droppableId={section.id}>
-              {(provided) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  className={`flex flex-col gap-1 max-w-96 bg-[#FAFBFC] border-2 border-[${section.color}] m-2 rounded-lg items-center`}
-                >
+          {currentBoard?.map((section) => {
+            return (
+              <Droppable key={section.id} droppableId={section.id}>
+                {(provided) => (
                   <div
-                    className={`flex gap-1 w-full justify-between p-2 items-center bg-[${section.color}] `}
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    className={`flex flex-col gap-1 max-w-96 bg-[#FAFBFC] border-2 border-[${section.color}] m-2 rounded-lg items-center`}
                   >
-                    <span>
-                      <img src={`${section.icon}`} className="w-3 h-3 mb-0.5" />
-                    </span>
-                    <span className="text-center text-[12px] font-bold">
-                      {" "}
-                      {section.title.toUpperCase()}{" "}
-                    </span>
-                    <span className="text-center text-[12px] font-bold">
-                      &#x2022; {section.applications?.length}
-                    </span>
-                    <span className="ml-auto">
-                      <img src={`${section.cta}`} className="w-4 h-4" />
-                    </span>
+                    <div
+                      className={`flex gap-1 w-full justify-between p-2 items-center ${section.color} `}
+                    >
+                      <span>
+                        <img
+                          src={`${section.icon}`}
+                          className="w-3 h-3 mb-0.5"
+                        />
+                      </span>
+                      <span className="text-center text-[12px] font-bold">
+                        {" "}
+                        {section.title.toUpperCase()}{" "}
+                      </span>
+                      <span className="text-center text-[12px] font-bold">
+                        &#x2022; {section.applications?.length}
+                      </span>
+                      <span className="ml-auto">
+                        <img src={`${section.cta}`} className="w-4 h-4" />
+                      </span>
+                    </div>
+                    <div>
+                      {section.applications.map((application, index) => (
+                        <Draggable
+                          key={application.id}
+                          draggableId={application.id}
+                          index={index}
+                        >
+                          {(provided, snapshot) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={{
+                                ...provided.draggableProps.style,
+                                opacity: snapshot.isDragging ? "0.5" : "1",
+                              }}
+                            >
+                              {application.external ? (
+                                <ExternalApplicationCard
+                                  key={application.id}
+                                  application={application}
+                                />
+                              ) : (
+                                <ApplicationCard
+                                  key={application.id}
+                                  application={application}
+                                />
+                              )}
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
                   </div>
-                  <div>
-                    {section.applications.map((application, index) => (
-                      <Draggable
-                        key={application.id}
-                        draggableId={application.id}
-                        index={index}
-                      >
-                        {(provided, snapshot) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={{
-                              ...provided.draggableProps.style,
-                              opacity: snapshot.isDragging ? "0.5" : "1",
-                            }}
-                          >
-                            {application.external ? (
-                              <ExternalApplicationCard
-                                key={application.id}
-                                application={application}
-                              />
-                            ) : (
-                              <ApplicationCard
-                                key={application.id}
-                                application={application}
-                              />
-                            )}
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                    {provided.placeholder}
-                  </div>
-                </div>
-              )}
-            </Droppable>
-          ))}
+                )}
+              </Droppable>
+            );
+          })}
         </div>
       </DragDropContext>
     </>
