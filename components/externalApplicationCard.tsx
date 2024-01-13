@@ -17,10 +17,10 @@ const ExternalApplicationCard: React.FC<ApplicationCardProps> = ({
   } = application;
 
   return (
-    <div className=" flex flex-col gap-2 bg-[#FFFF] px-3 py-3 justify-betwwen border-2 border-[#E1E4E8] rounded-lg min-w-80 h-auto m-2 ">
+    <div className=" flex flex-col gap-1 sm:w-96 bg-[#FFFF] px-3 py-3 justify-betwwen border-2 border-[#E1E4E8] rounded-lg min-w-80 h-auto m-2 ">
       <div className="flex justify-between ">
         <div className="text-sm font-bold">{firstName + " " + lastName}</div>
-        <div className=" text-[10px] font-light text-[#6A737D] text-nowrap">
+        <div className="flex flex-col items-center pt-[1px] text-[10px] font-light text-[#6A737D] text-nowrap">
           Applied {formatTimeAgo(applicationDate)}
         </div>
       </div>
@@ -42,7 +42,7 @@ const ExternalApplicationCard: React.FC<ApplicationCardProps> = ({
         </div>
         <div className="flex flex-col">
           <span className="text-[10px] font-light text-[#6A737D] text-nowrap">
-            Resume
+            Notice Period
           </span>
           <span className="text-xs font-bold">{noticePeriod}</span>
         </div>

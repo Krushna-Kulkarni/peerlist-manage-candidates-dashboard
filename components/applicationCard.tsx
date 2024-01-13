@@ -27,7 +27,7 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ application }) => {
 
   return (
     <>
-      <div className=" flex flex-col gap-2 bg-[#FFFF] px-3 py-3 justify-between border-2 border-[#E1E4E8] rounded-lg min-w-80 h-auto m-2 ">
+      <div className=" flex flex-col gap-1 sm:w-96 bg-[#FFFF] px-3 py-3 justify-between border-2 border-[#E1E4E8] rounded-lg min-w-80 h-auto m-2 ">
         <div className="flex justify-between">
           <img src={`${profilePicture}`} className="w-9 h-9" />
           {peerlistMatched ? (
@@ -60,7 +60,7 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ application }) => {
                 )}
               </div>
               {selfApplied && (
-                <div className=" text-[10px] font-light text-[#6A737D] text-nowrap">
+                <div className="flex flex-col items-center pt-[1px] text-[10px] font-light text-[#6A737D] text-nowrap">
                   Applied {formatTimeAgo(applicationDate)}
                 </div>
               )}
