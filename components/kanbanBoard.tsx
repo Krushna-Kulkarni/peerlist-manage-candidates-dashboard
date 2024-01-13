@@ -45,7 +45,7 @@ export default function KanbanBoard() {
       applications: [],
       title: "Rejected",
       icon: roundedRejected,
-      color: "bg-[#FFEAEA]",
+      color: "#FFEAEA",
       cta: collapse,
     },
     {
@@ -53,7 +53,7 @@ export default function KanbanBoard() {
       applications: [],
       title: "Applied",
       icon: roundedApplied,
-      color: "bg-[#E1E4E8]",
+      color: "#E1E4E8",
       cta: download,
     },
     {
@@ -61,7 +61,7 @@ export default function KanbanBoard() {
       applications: [],
       title: "Shortlisted",
       icon: roundedShortlisted,
-      color: "bg-[#E2F5EA]",
+      color: "#E2F5EA",
       cta: downloadGreen,
     },
   ]);
@@ -134,7 +134,7 @@ export default function KanbanBoard() {
   return (
     <>
       <DragDropContext onDragEnd={onDragEndHandler}>
-        <div className="flex flex-wrap ">
+        <div className="flex flex-wrap justify-evenly sm:justify-center m-auto">
           {currentBoard?.map((section) => {
             return (
               <Droppable key={section.id} droppableId={section.id}>
@@ -142,10 +142,14 @@ export default function KanbanBoard() {
                   <div
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    className={`flex flex-col gap-1 max-w-96 bg-[#FAFBFC] border-2 border-[${section.color}] m-2 rounded-lg items-center`}
+                    style={{
+                      border: `2px solid ${section.color}`,
+                    }}
+                    className={`flex flex-col min-w-[340px] sm:min-w-fit gap-1 max-w-96 bg-[#FAFBFC]   m-2 rounded-lg items-center`}
                   >
                     <div
-                      className={`flex gap-1 w-full justify-between p-2 items-center ${section.color} `}
+                      style={{ backgroundColor: section.color }}
+                      className={`flex gap-1 w-full justify-between p-2 items-center  rounded-t-md  `}
                     >
                       <span>
                         <img
