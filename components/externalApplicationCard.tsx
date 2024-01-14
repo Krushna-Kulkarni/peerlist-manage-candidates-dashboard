@@ -17,7 +17,9 @@ const ExternalApplicationCard: React.FC<ApplicationCardProps> = ({
   } = application;
 
   return (
-    <div className=" flex flex-col gap-1 sm:w-96 bg-[#FFFF] px-3 py-3 justify-betwwen border-2 border-[#E1E4E8] rounded-lg min-w-80 h-auto m-2 ">
+    // target md:min-w- & md:m-1for card width on taablet+
+    // target min-w- & m-auto for card width on mobile
+    <div className="flex flex-col gap-1 min-w-full md:min-w-64 bg-[#FFFF] px-3 py-3 justify-between border-2 border-[#E1E4E8] rounded-lg  h-auto m-auto md:m-1">
       <div className="flex justify-between ">
         <div className="text-sm font-bold">{firstName + " " + lastName}</div>
         <div className="flex flex-col items-center pt-[1px] text-[10px] font-light text-[#6A737D] text-nowrap">
@@ -30,7 +32,7 @@ const ExternalApplicationCard: React.FC<ApplicationCardProps> = ({
             Resume
           </span>
           <div className="flex justify-center gap-1 ">
-            <span className="text-xs font-bold">
+            <span className="text-[11px] font-bold">
               {/* {resumeLink} */}
               DarrellSteward.pdf
             </span>
@@ -44,7 +46,7 @@ const ExternalApplicationCard: React.FC<ApplicationCardProps> = ({
           <span className="text-[10px] font-light text-[#6A737D] text-nowrap">
             Notice Period
           </span>
-          <span className="text-xs font-bold">{noticePeriod}</span>
+          <span className="text-[11px] font-bold">{noticePeriod}</span>
         </div>
       </div>
       {!isEmpty(statusHistory) &&
@@ -59,7 +61,7 @@ const ExternalApplicationCard: React.FC<ApplicationCardProps> = ({
             </span>
             <span className="text-[10px] font-light text-[#6A737D] text-nowrap">
               {currentStatus} by{" "}
-              <span className="text-[11px] text-[#6A737D] font-semibold">
+              <span className="text-[10px] text-[#6A737D] font-semibold">
                 {getLatestStatus(statusHistory).changedBy.firstName +
                   " " +
                   getLatestStatus(statusHistory).changedBy.lastName}

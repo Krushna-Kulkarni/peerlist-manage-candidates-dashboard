@@ -3,24 +3,13 @@
 import { GetServerSideProps } from "next";
 import React from "react";
 import { resetServerContext } from "react-beautiful-dnd";
-
-import { ApplicationCardProps } from "@/utils/interfaces";
+import { ApplicationCardProps, section } from "@/utils/interfaces";
 import ApplicationCard from "./../components/applicationCard";
 import { openings, users } from "@/data/data";
 import ExternalApplicationCard from "./../components/externalApplicationCard";
 import { useEffect, useState } from "react";
-import { v4 as uuid } from "uuid";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { statusHistory } from "./../utils/interfaces";
-
-import {
-  collapse,
-  download,
-  downloadGreen,
-  roundedApplied,
-  roundedRejected,
-  roundedShortlisted,
-} from "@/data/icons";
+import { sections } from "@/utils/constants";
 
 export default function KanbanBoard() {
   //You can take this as props also
@@ -30,41 +19,7 @@ export default function KanbanBoard() {
 
   const currentUser = users[10];
 
-  interface section {
-    id: string;
-    applications: ApplicationCardProps["application"][];
-    title: string;
-    icon: string;
-    color: string;
-    cta: string;
-  }
-
-  const [currentBoard, setCurrentBoard] = useState<section[]>([
-    {
-      id: uuid(),
-      applications: [],
-      title: "Rejected",
-      icon: roundedRejected,
-      color: "#FFEAEA",
-      cta: collapse,
-    },
-    {
-      id: uuid(),
-      applications: [],
-      title: "Applied",
-      icon: roundedApplied,
-      color: "#E1E4E8",
-      cta: download,
-    },
-    {
-      id: uuid(),
-      applications: [],
-      title: "Shortlisted",
-      icon: roundedShortlisted,
-      color: "#E2F5EA",
-      cta: downloadGreen,
-    },
-  ]);
+  const [currentBoard, setCurrentBoard] = useState<section[]>(sections);
 
   useEffect(() => {
     // Map each application to the respective array in currentBoard
@@ -134,7 +89,7 @@ export default function KanbanBoard() {
   return (
     <>
       <DragDropContext onDragEnd={onDragEndHandler}>
-        <div className="flex flex-wrap justify-evenly sm:justify-center m-auto">
+        <div className="flex flex-wrap lg:flex-nowrap justify-evenly lg:justify-normal px-2 m-auto">
           {currentBoard?.map((section) => {
             return (
               <Droppable key={section.id} droppableId={section.id}>
@@ -143,65 +98,74 @@ export default function KanbanBoard() {
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                     style={{
-                      border: `2px solid ${section.color}`,
+                      border: `2px solid ${section.bgColor}`,
                     }}
-                    className={`flex flex-col min-w-[340px] sm:min-w-fit gap-1 max-w-96 bg-[#FAFBFC]   m-2 rounded-lg items-center`}
+                    // change md:min-w- for the section width on desktop when section.cards.length is 0
+                    // change min-w- for the section width on desktop when section.cards.length is 0
+                    className={`flex flex-col min-w-full md:min-w-72 md:flex-grow gap-1 max-w-full bg-[#FAFBFC] pb-4  m-1 rounded-lg items-center`}
                   >
                     <div
-                      style={{ backgroundColor: section.color }}
-                      className={`flex gap-1 w-full justify-between p-2 items-center  rounded-t-md  `}
+                      style={{ backgroundColor: section.bgColor }}
+                      className={`flex gap-1 w-full p-2 items-center rounded-t-md  `}
                     >
                       <span>
                         <img
                           src={`${section.icon}`}
-                          className="w-3 h-3 mb-0.5"
+                          className="w-4 h-4 mb-0.5"
                         />
                       </span>
-                      <span className="text-center text-[12px] font-bold">
+                      <span
+                        style={{ color: section.color }}
+                        className="text-center text-[12px] font-bold"
+                      >
                         {" "}
                         {section.title.toUpperCase()}{" "}
                       </span>
-                      <span className="text-center text-[12px] font-bold">
+                      <span
+                        style={{ color: section.color }}
+                        className="text-center text-[12px] font-bold"
+                      >
                         &#x2022; {section.applications?.length}
                       </span>
+                      {/* change this ml auto for 'md:'  for targeting the onClick - expand/collapse*/}
                       <span className="ml-auto">
                         <img src={`${section.cta}`} className="w-4 h-4" />
                       </span>
                     </div>
-                    <div>
-                      {section.applications.map((application, index) => (
-                        <Draggable
-                          key={application.id}
-                          draggableId={application.id}
-                          index={index}
-                        >
-                          {(provided, snapshot) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              style={{
-                                ...provided.draggableProps.style,
-                                opacity: snapshot.isDragging ? "0.5" : "1",
-                              }}
-                            >
-                              {application.external ? (
-                                <ExternalApplicationCard
-                                  key={application.id}
-                                  application={application}
-                                />
-                              ) : (
-                                <ApplicationCard
-                                  key={application.id}
-                                  application={application}
-                                />
-                              )}
-                            </div>
-                          )}
-                        </Draggable>
-                      ))}
-                      {provided.placeholder}
-                    </div>
+
+                    {section.applications.map((application, index) => (
+                      <Draggable
+                        key={application.id}
+                        draggableId={application.id}
+                        index={index}
+                      >
+                        {(provided, snapshot) => (
+                          <div
+                            className="w-full px-1 pt-1 md:px-0 md:pt-0"
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={{
+                              ...provided.draggableProps.style,
+                              opacity: snapshot.isDragging ? "0.5" : "1",
+                            }}
+                          >
+                            {application.external ? (
+                              <ExternalApplicationCard
+                                key={application.id}
+                                application={application}
+                              />
+                            ) : (
+                              <ApplicationCard
+                                key={application.id}
+                                application={application}
+                              />
+                            )}
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
                   </div>
                 )}
               </Droppable>
