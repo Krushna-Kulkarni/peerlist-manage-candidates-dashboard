@@ -1,5 +1,6 @@
 import { userInfo } from "@/utils/interfaces";
 import { v4 as uuidv4 } from "uuid";
+import { peerlistIcon } from "./icons";
 
 export const users = [
   {
@@ -260,10 +261,13 @@ export const users = [
 export const openings = [
   {
     id: uuidv4(),
-    title: "Software Engineer 1",
-    location: "xyz city",
-    jobMode: "Remote",
+    title: "Software Engineer, Front End",
+    company: "Peerlist",
+    icon: peerlistIcon,
+    location: "Remote (United State, Canada)",
+    jobType: "Full time",
     postedBy: users[0],
+    openingDate: Date.now(),
     viewedBy: 68,
     applications: [
       {

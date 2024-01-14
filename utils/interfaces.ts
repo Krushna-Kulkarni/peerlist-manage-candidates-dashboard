@@ -41,7 +41,31 @@ export interface applicationData {
   currentStatus: string;
   statusHistory: statusHistory[];
 }
+export type openingData = {
+  id: string;
+  title: string;
+  company: string;
+  location: string;
+  jobType: string;
+  postedBy: userInfo;
+  openingDate:number;
+  viewedBy: number;
+  applications: applicationData[];
+};
 
 export interface ApplicationCardProps {
   application: applicationData;
+}
+export interface OpeningDetailsProps {
+  opening: openingData;
+}
+
+export interface section {
+  id: string;
+  applications: ApplicationCardProps["application"][];
+  title: string;
+  icon: string;
+  color: string;
+  bgColor: string;
+  cta: string;
 }

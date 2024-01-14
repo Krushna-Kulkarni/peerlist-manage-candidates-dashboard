@@ -3,24 +3,13 @@
 import { GetServerSideProps } from "next";
 import React from "react";
 import { resetServerContext } from "react-beautiful-dnd";
-
-import { ApplicationCardProps } from "@/utils/interfaces";
+import { ApplicationCardProps, section } from "@/utils/interfaces";
 import ApplicationCard from "./../components/applicationCard";
 import { openings, users } from "@/data/data";
 import ExternalApplicationCard from "./../components/externalApplicationCard";
 import { useEffect, useState } from "react";
-import { v4 as uuid } from "uuid";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { statusHistory } from "./../utils/interfaces";
-
-import {
-  collapse,
-  download,
-  downloadGreen,
-  roundedApplied,
-  roundedRejected,
-  roundedShortlisted,
-} from "@/data/icons";
+import { sections } from "@/utils/constants";
 
 export default function KanbanBoard() {
   //You can take this as props also
@@ -30,45 +19,7 @@ export default function KanbanBoard() {
 
   const currentUser = users[10];
 
-  interface section {
-    id: string;
-    applications: ApplicationCardProps["application"][];
-    title: string;
-    icon: string;
-    color: string;
-    bgColor: string;
-    cta: string;
-  }
-
-  const [currentBoard, setCurrentBoard] = useState<section[]>([
-    {
-      id: uuid(),
-      applications: [],
-      title: "Rejected",
-      icon: roundedRejected,
-      color: "#EB5757",
-      bgColor: "#FFEAEA",
-      cta: collapse,
-    },
-    {
-      id: uuid(),
-      applications: [],
-      title: "Applied",
-      icon: roundedApplied,
-      color: "#0D0D0D",
-      bgColor: "#E1E4E8",
-      cta: download,
-    },
-    {
-      id: uuid(),
-      applications: [],
-      title: "Shortlisted",
-      icon: roundedShortlisted,
-      color: "#219653",
-      bgColor: "#E2F5EA",
-      cta: downloadGreen,
-    },
-  ]);
+  const [currentBoard, setCurrentBoard] = useState<section[]>(sections);
 
   useEffect(() => {
     // Map each application to the respective array in currentBoard
