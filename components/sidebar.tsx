@@ -73,13 +73,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
               href={`${link.link}`}
               className="text-[10px] text-[#444D56] font-semibold hover:underline"
             >
-              {`•`}
               <span className="hover:underline">{link.title} </span>
+              {index < supportLinks.length - 1 && `•`}
             </a>
           ))}
         </p>
         <div className="text-[10px] text-[#444D56]">
-          © 2023 Peerlist Inc.<div></div>
+          © 2024 Peerlist Inc.<div></div>
         </div>
       </div>
     </div>
