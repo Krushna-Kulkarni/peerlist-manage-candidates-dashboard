@@ -1,3 +1,17 @@
+export const PeerlistLogo = "/peerlist.svg";
+
+// Sidebar - Nav Icons
+export const scroll = "/navIcons/scroll.svg";
+export const projects = "/navIcons/projects.svg";
+export const inbox = "/navIcons/inbox.svg";
+export const jobs = "/navIcons/jobs.svg";
+export const search = "/navIcons/search.svg";
+export const myNetwork = "/navIcons/my-network.svg";
+
+export const loom = "/navIcons/loom.svg";
+export const rightArrow = "/navIcons/right-arrow.svg";
+
+// Other Icons
 export const verified = "/icons/verified.svg";
 export const peerlistIcon = "icons/peerlist.svg";
 export const p = "icons/Peerlist - jpeg 0.svg";

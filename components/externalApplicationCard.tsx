@@ -1,4 +1,4 @@
-import { rejected, resumeArrow, shortlisted } from "@/data/icons";
+import { rejected, resumeArrow, shortlisted } from "@/utils/icons";
 import { formatTimeAgo, getLatestStatus } from "@/utils/helperFunctions";
 import { ApplicationCardProps } from "@/utils/interfaces";
 import { isEmpty } from "lodash";

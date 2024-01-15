@@ -4,19 +4,16 @@ import {
   dropdown,
   editPencil,
   openNewWindow,
-  p,
-  peerlistIcon,
   peerlistIconRounded,
   share,
   threeVerticalDots,
-} from "@/data/icons";
+} from "@/utils/icons";
 import { OpeningDetailsProps } from "@/utils/interfaces";
 import isEmpty from "lodash/isEmpty";
 import { formatTimeAgo } from "./../utils/helperFunctions";
 
 const OpeningDetails: React.FC<OpeningDetailsProps> = ({ opening }) => {
   const {
-    id,
     title,
     company,
     location,
@@ -27,14 +24,14 @@ const OpeningDetails: React.FC<OpeningDetailsProps> = ({ opening }) => {
     applications,
   } = opening;
   return (
-    <div className="md:h-44 bg-[#FAFBFC] border-b-2 border-[#E1E4E8]">
+    <div className="md:h-44 bg-[#FAFBFC] border-b-[1px] border-[#E1E4E8]">
       <div className="flex flex-col gap-2 md:gap-6 w-full p-2  lg:p-4">
         <div className="flex gap-2 justify-between">
           <div className="flex items-center">
-            <span className="flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 border-2 border-[#E1E4E8] rounded-2xl">
+            <span className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 border-2 border-[#E1E4E8] rounded-2xl">
               <img
                 src={`${peerlistIconRounded}`}
-                className="w-8 h-8 sm:w-10 sm:h-10"
+                className="w-8 h-8 sm:w-10 sm:h-10 drop-shadow"
               />
             </span>
           </div>
@@ -53,16 +50,16 @@ const OpeningDetails: React.FC<OpeningDetailsProps> = ({ opening }) => {
           </div>
           <div className="flex flex-col justify-start ml-auto">
             <div className="flex flex-col sm:flex-row  flex-wrap gap-1 justify-evenly">
-              <span className="flex items-center w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF]">
+              <span className="flex items-center cursor-pointer w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF]">
                 <img src={`${editPencil}`} className="w-4 h-4" />
               </span>
-              <span className="flex items-center w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF]">
+              <span className="flex items-center cursor-pointer w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF]">
                 <img src={`${openNewWindow}`} className="w-4 h-4" />
               </span>
-              <span className="flex items-center w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF]">
+              <span className="flex items-center cursor-pointer w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF]">
                 <img src={`${share}`} className="w-4 h-4" />
               </span>
-              <span className="flex items-center w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF]">
+              <span className="flex items-center cursor-pointer w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF]">
                 <img src={`${threeVerticalDots}`} className="w-4 h-4" />
               </span>
             </div>

@@ -4,10 +4,16 @@ import {
   collapse,
   download,
   downloadGreen,
+  inbox,
+  jobs,
+  myNetwork,
+  projects,
   roundedApplied,
   roundedRejected,
   roundedShortlisted,
-} from "@/data/icons";
+  scroll,
+  search,
+} from "@/utils/icons";
 
 export const sections = [
   {
@@ -37,4 +43,22 @@ export const sections = [
     bgColor: "#E2F5EA",
     cta: downloadGreen,
   },
+];
+
+export const navigation = [
+  { title: "Scroll", icon: scroll, link: "#", isActive: true },
+  { title: "Projects", icon: projects, link: "#", isActive: false },
+  { title: "Inbox", icon: inbox, link: "#", isActive: false },
+  { title: "Jobs", icon: jobs, link: "#", isActive: false },
+  { title: "Search", icon: search, link: "#", isActive: false },
+  { title: "My Network", icon: myNetwork, link: "#", isActive: false },
+];
+
+export const supportLinks = [
+  { title: "Blog", link: "#" },
+  { title: "Help Center", link: "#" },
+  { title: "Feedback", link: "#" },
+  { title: "Code of Conduct", link: "#" },
+  { title: "Privacy", link: "#" },
+  { title: "T&C", link: "#" },
 ];
