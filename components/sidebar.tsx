@@ -1,7 +1,7 @@
 "use client";
-import { users } from "@/data/data";
+
 import { navigation, supportLinks } from "@/utils/constants";
-import { PeerlistLogo, loom, projects, rightArrow } from "@/utils/icons";
+import { PeerlistLogo, loom, rightArrow } from "@/utils/icons";
 import { SidebarProps } from "@/utils/interfaces";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -11,7 +11,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
   const { firstName, profilePicture } = currentUser;
 
   return (
-    <div className="flex flex-col h-full w-full">
+    <div className="flex flex-col h-full w-full fixed">
       <div className="my-3">
         <Link href="#">
           <img src={`${PeerlistLogo}`} className="h-8" />
