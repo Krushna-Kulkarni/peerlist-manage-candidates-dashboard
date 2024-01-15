@@ -11,7 +11,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
   const { firstName, profilePicture } = currentUser;
 
   return (
-    <div className="flex flex-col h-full w-full fixed">
+    <div className="flex flex-col h-full fixed">
       <div className="my-3">
         <Link href="#">
           <img src={`${PeerlistLogo}`} className="h-8" />
