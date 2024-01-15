@@ -108,11 +108,27 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
         updatedApplication
       );
 
-      currentBoard[sourceSectionIndex].applications = sourceApplicationArray;
-      currentBoard[destinationSectionIndex].applications =
-        destinationApplicationArray;
+      // Update currentBoard
+      setCurrentBoard((prevBoard) => {
+        const updatedBoard = [...prevBoard];
+        updatedBoard[sourceSectionIndex] = {
+          ...sourceSectionObject,
+          applications: sourceApplicationArray,
+        };
+        updatedBoard[destinationSectionIndex] = {
+          ...destinationSectionObject,
+          applications: destinationApplicationArray,
+        };
+        return updatedBoard;
+      });
 
-      setCurrentBoard(currentBoard);
+      // Update applicationsData
+      const updatedApplicationsData = [...applicationsData];
+      const appIndex = updatedApplicationsData.findIndex(
+        (app) => app.id === updatedApplication.id
+      );
+      updatedApplicationsData[appIndex] = updatedApplication;
+      setApplicationsData(updatedApplicationsData);
     }
   };
 
