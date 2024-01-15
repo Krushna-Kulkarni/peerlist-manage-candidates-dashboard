@@ -48,7 +48,7 @@ export type openingData = {
   location: string;
   jobType: string;
   postedBy: userInfo;
-  openingDate:number;
+  openingDate: number;
   viewedBy: number;
   applications: applicationData[];
 };
@@ -58,6 +58,13 @@ export interface ApplicationCardProps {
 }
 export interface OpeningDetailsProps {
   opening: openingData;
+}
+export interface KanbanBoardProps {
+  opening: openingData;
+  currentUser: userInfo;
+}
+export interface SidebarProps {
+  currentUser: userInfo;
 }
 
 export interface section {

@@ -27,7 +27,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           onChange={handleSearchChange}
         />
         <div
-          className="flex items-center h-4 cursor-pointer px-[0.4em] py-[0.6em] rounded-full bg-[#FFFFFF] hover:bg-[#E1E4E8]"
+          style={{
+            display: searchQuery ? "flex" : "none",
+          }}
+          className="flex items-center h-4 cursor-pointer px-[0.4em] py-[0.6em] border border-[#D1D5DA] rounded-full bg-[#FFFFFF] hover:bg-[#E1E4E8]"
           onClick={() => setSearchQuery("")}
         >
           <span className="text-sm mb-0.5">x</span>

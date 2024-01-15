@@ -19,7 +19,7 @@ const ExternalApplicationCard: React.FC<ApplicationCardProps> = ({
   return (
     // target md:min-w- & md:m-1for card width on taablet+
     // target min-w- & m-auto for card width on mobile
-    <div className="flex flex-col gap-1 min-w-full md:min-w-64 bg-[#FFFF] px-3 py-3 justify-between border-2 border-[#E1E4E8] rounded-lg  h-auto m-auto md:m-1">
+    <div className="flex flex-col gap-1 min-w-full md:min-w-64 bg-[#FFFF] px-3 py-3 justify-between border-2 border-[#E1E4E8] rounded-lg  h-auto m-auto md:m-1 hover:bg-[#FAFBFC]">
       <div className="flex justify-between ">
         <div className="text-sm font-bold">{firstName + " " + lastName}</div>
         <div className="flex flex-col items-center pt-[1px] text-[10px] font-light text-[#6A737D] text-nowrap">

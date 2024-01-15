@@ -50,16 +50,16 @@ const OpeningDetails: React.FC<OpeningDetailsProps> = ({ opening }) => {
           </div>
           <div className="flex flex-col justify-start ml-auto">
             <div className="flex flex-col sm:flex-row  flex-wrap gap-1 justify-evenly">
-              <span className="flex items-center cursor-pointer w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF]">
+              <span className="flex items-center cursor-pointer w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF] hover:bg-[#FAFBFC]">
                 <img src={`${editPencil}`} className="w-4 h-4" />
               </span>
-              <span className="flex items-center cursor-pointer w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF]">
+              <span className="flex items-center cursor-pointer w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF] hover:bg-[#FAFBFC]">
                 <img src={`${openNewWindow}`} className="w-4 h-4" />
               </span>
-              <span className="flex items-center cursor-pointer w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF]">
+              <span className="flex items-center cursor-pointer w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF] hover:bg-[#FAFBFC]">
                 <img src={`${share}`} className="w-4 h-4" />
               </span>
-              <span className="flex items-center cursor-pointer w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF]">
+              <span className="flex items-center cursor-pointer w-6 h-6 px-1 py-1 border border-[#D1D5DA] rounded-full bg-[#FFFFFF] hover:bg-[#FAFBFC]">
                 <img src={`${threeVerticalDots}`} className="w-4 h-4" />
               </span>
             </div>

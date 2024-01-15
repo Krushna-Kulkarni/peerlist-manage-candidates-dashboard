@@ -2,12 +2,13 @@
 import { users } from "@/data/data";
 import { navigation, supportLinks } from "@/utils/constants";
 import { PeerlistLogo, loom, projects, rightArrow } from "@/utils/icons";
+import { SidebarProps } from "@/utils/interfaces";
 import Link from "next/link";
 import React, { useState } from "react";
 
-const Sidebar = () => {
+export const Sidebar: React.FC<SidebarProps> = ({ currentUser }) => {
   const [navitems, setNavItems] = useState(navigation);
-  const { firstName, profilePicture } = users[10];
+  const { firstName, profilePicture } = currentUser;
 
   return (
     <div className="flex flex-col h-full w-full">
@@ -48,12 +49,14 @@ const Sidebar = () => {
               {firstName}
             </span>
           </div>
-          <div className="flex gap-1.5 items-center py-2">
-            <span>
+          <div className="flex gap-1.5 items-center py-2 group">
+            <span className="group-hover:cursor-pointer">
               <img src={`${loom}`} className="w-6 h-6" />
             </span>
-            <div className="flex flex-col">
-              <span className="text-[14px]">Loom</span>
+            <div className="flex flex-col hover:cursor-pointer">
+              <span className="text-[14px] transition-transform group-hover:translate-x-1 group-hover:cursor-pointer">
+                Loom
+              </span>
               <div className="text-[10px] flex items-center gap-1">
                 Manage jobs, teams, & more
                 <span>{<img src={`${rightArrow}`} className="w-2 h-2" />}</span>
@@ -62,16 +65,16 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-      <div className="w-[188px] flex flex-col gap-1 mt-auto pb-1">
+      <div className="w-[188px] flex flex-col justify-center gap-1 mt-auto pb-1">
         <p className="leading-[0.8em]">
           {supportLinks.map((link, index) => (
             <a
               key={index}
               href={`${link.link}`}
-              className="text-[10px] text-[#444D56] font-semibold"
+              className="text-[10px] text-[#444D56] font-semibold hover:underline"
             >
-              {link.title}
-              {index < supportLinks.length - 1 && ` • `}
+              {index < supportLinks.length - 1 && `•`}
+              <span className="hover:underline">{link.title} </span>
             </a>
           ))}
         </p>

@@ -3,29 +3,30 @@
 import { GetServerSideProps } from "next";
 import React from "react";
 import { resetServerContext } from "react-beautiful-dnd";
-import { ApplicationCardProps, section } from "@/utils/interfaces";
+import {
+  ApplicationCardProps,
+  KanbanBoardProps,
+  section,
+} from "@/utils/interfaces";
 import ApplicationCard from "./../components/applicationCard";
-import { openings, users } from "@/data/data";
 import ExternalApplicationCard from "./../components/externalApplicationCard";
 import { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { sections } from "@/utils/constants";
 import SearchBar from "./searchBar";
 
-export default function KanbanBoard() {
-  //You can take this as props also
+export const KanbanBoard: React.FC<KanbanBoardProps> = ({
+  opening,
+  currentUser,
+}) => {
   const [applicationsData, setApplicationsData] = useState<
     ApplicationCardProps["application"][]
-  >(openings[0].applications);
-
-  const currentUser = users[10];
+  >(opening.applications);
 
   const [currentBoard, setCurrentBoard] = useState<section[]>(sections);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
-    console.log("Search Query:", searchQuery);
-
     let filteredApplications = applicationsData;
     if (searchQuery.trim() !== "") {
       filteredApplications = applicationsData.filter((application) => {
@@ -46,17 +47,10 @@ export default function KanbanBoard() {
       });
     }
 
-    console.log("Filtered Applications:", filteredApplications);
-
     setCurrentBoard((prevBoard) => {
       const updatedData = prevBoard.map((section) => {
         const filteredSectionApplications = filteredApplications.filter(
           (application) => application.currentStatus === section.title
-        );
-
-        console.log(
-          `Section: ${section.title}, Filtered Applications:`,
-          filteredSectionApplications
         );
 
         return {
@@ -64,8 +58,6 @@ export default function KanbanBoard() {
           applications: filteredSectionApplications,
         };
       });
-
-      console.log("Updated Data:", updatedData);
 
       return updatedData;
     });
@@ -214,7 +206,7 @@ export default function KanbanBoard() {
       </DragDropContext>
     </>
   );
-}
+};
 
 // for removing warnings in console
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
