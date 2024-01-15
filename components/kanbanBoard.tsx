@@ -21,18 +21,55 @@ export default function KanbanBoard() {
   const currentUser = users[10];
 
   const [currentBoard, setCurrentBoard] = useState<section[]>(sections);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
-    // Map each application to the respective array in currentBoard
-    const updatedData = currentBoard.map((section) => ({
-      ...section,
-      applications: applicationsData.filter(
-        (application) => application.currentStatus === section.title
-      ),
-    }));
+    console.log("Search Query:", searchQuery);
 
-    setCurrentBoard(updatedData);
-  }, [applicationsData]);
+    let filteredApplications = applicationsData;
+    if (searchQuery.trim() !== "") {
+      filteredApplications = applicationsData.filter((application) => {
+        const {
+          firstName,
+          lastName,
+          peerlistProfile: { organisation, role },
+          contact: { email },
+        } = application;
+
+        return (
+          firstName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          lastName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          role?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          organisation?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          email?.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      });
+    }
+
+    console.log("Filtered Applications:", filteredApplications);
+
+    setCurrentBoard((prevBoard) => {
+      const updatedData = prevBoard.map((section) => {
+        const filteredSectionApplications = filteredApplications.filter(
+          (application) => application.currentStatus === section.title
+        );
+
+        console.log(
+          `Section: ${section.title}, Filtered Applications:`,
+          filteredSectionApplications
+        );
+
+        return {
+          ...section,
+          applications: filteredSectionApplications,
+        };
+      });
+
+      console.log("Updated Data:", updatedData);
+
+      return updatedData;
+    });
+  }, [searchQuery]);
 
   const onDragEndHandler = (result: any) => {
     if (!result.destination) return;
@@ -89,7 +126,7 @@ export default function KanbanBoard() {
 
   return (
     <>
-      <SearchBar />
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <DragDropContext onDragEnd={onDragEndHandler}>
         <div className="flex flex-wrap lg:flex-nowrap justify-evenly lg:justify-normal px-3 sm:px-6 pb-6 m-auto">
           {currentBoard?.map((section) => {
