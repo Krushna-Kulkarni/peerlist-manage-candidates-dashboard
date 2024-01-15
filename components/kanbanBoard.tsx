@@ -102,7 +102,7 @@ export default function KanbanBoard() {
                     }}
                     // change md:min-w- for the section width on desktop when section.cards.length is 0
                     // change min-w- for the section width on desktop when section.cards.length is 0
-                    className={`flex flex-col min-w-full md:min-w-72 md:flex-grow gap-1 max-w-full bg-[#FAFBFC] pb-4  m-1 rounded-lg items-center`}
+                    className={`flex flex-col min-w-full sm:min-w-72 sm:flex-grow gap-1 max-w-full bg-[#FAFBFC] pb-4  m-1 rounded-lg items-center`}
                   >
                     <div
                       style={{ backgroundColor: section.bgColor }}

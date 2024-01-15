@@ -1,6 +1,6 @@
 import { userInfo } from "@/utils/interfaces";
 import { v4 as uuidv4 } from "uuid";
-import { peerlistIcon } from "./icons";
+import { peerlistIcon } from "../utils/icons";
 
 export const users = [
   {

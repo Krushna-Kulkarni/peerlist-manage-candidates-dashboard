@@ -7,7 +7,7 @@ import {
 import { ApplicationCardProps } from "@/utils/interfaces";
 import isEmpty from "lodash/isEmpty";
 import moment from "moment";
-import { peerlistIcon, rejected, shortlisted, verified } from "@/data/icons";
+import { peerlistIcon, rejected, shortlisted, verified } from "@/utils/icons";
 
 const ApplicationCard: React.FC<ApplicationCardProps> = ({ application }) => {
   const {
