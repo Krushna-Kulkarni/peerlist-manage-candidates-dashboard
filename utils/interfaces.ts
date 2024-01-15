@@ -55,6 +55,7 @@ export type openingData = {
 
 export interface ApplicationCardProps {
   application: applicationData;
+  isExpanded: boolean;
 }
 export interface OpeningDetailsProps {
   opening: openingData;

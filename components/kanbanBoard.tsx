@@ -26,6 +26,22 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
   const [currentBoard, setCurrentBoard] = useState<section[]>(sections);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
+  const [expandedSections, setExpandedSections] = useState([
+    "Rejected",
+    "Shortlisted",
+    "Applied",
+  ]);
+
+  const sectionExpansionHandler = (section: string) => {
+    setExpandedSections((prevExpandedSections) => {
+      const updatedExpandedSections = prevExpandedSections.includes(section)
+        ? [...prevExpandedSections].filter((sec) => sec !== section)
+        : [...prevExpandedSections, section];
+      console.log(updatedExpandedSections);
+      return updatedExpandedSections;
+    });
+  };
+
   useEffect(() => {
     let filteredApplications = applicationsData;
     if (searchQuery.trim() !== "") {
@@ -126,43 +142,68 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
               <Droppable key={section.id} droppableId={section.id}>
                 {(provided) => (
                   <div
+                    onClick={() => sectionExpansionHandler(section.title)}
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                     style={{
                       border: `2px solid ${section.bgColor}`,
+                      minWidth:
+                        window.innerWidth >= 640 &&
+                        expandedSections.includes(section.title)
+                          ? "18rem"
+                          : "fit-content",
+                      flex:
+                        window.innerWidth >= 640 &&
+                        expandedSections.includes(section.title)
+                          ? "0"
+                          : "none",
                     }}
                     // change md:min-w- for the section width on desktop when section.cards.length is 0
-                    // change min-w- for the section width on desktop when section.cards.length is 0
-                    className={`flex flex-col min-w-full sm:min-w-72 sm:flex-grow gap-1 max-w-full bg-[#FAFBFC] pb-4  m-1 rounded-lg items-center`}
+                    // change min-w- for the section width on mobile when section.cards.length is 0
+                    className={`flex flex-col min-w-full sm:min-w-72 sm:flex-grow gap-1 max-w-full bg-[#FAFBFC] pb-4  m-1 rounded-lg items-center cursor-pointer`}
                   >
-                    <div
-                      style={{ backgroundColor: section.bgColor }}
-                      className={`flex gap-1 w-full p-2 items-center rounded-t-md  `}
-                    >
-                      <span>
-                        <img
-                          src={`${section.icon}`}
-                          className="w-4 h-4 mb-0.5"
-                        />
-                      </span>
-                      <span
-                        style={{ color: section.color }}
-                        className="text-center text-[12px] font-bold"
+                    {expandedSections.includes(section.title) ? (
+                      <div
+                        style={{ backgroundColor: section.bgColor }}
+                        className={`flex gap-1 w-full p-2 items-center rounded-t-md  `}
                       >
-                        {" "}
-                        {section.title.toUpperCase()}{" "}
-                      </span>
-                      <span
-                        style={{ color: section.color }}
-                        className="text-center text-[12px] font-bold"
+                        <span>
+                          <img
+                            src={`${section.icon}`}
+                            className="w-4 h-4 mb-0.5"
+                          />
+                        </span>
+                        <span
+                          style={{ color: section.color }}
+                          className="text-center text-[12px] font-bold"
+                        >
+                          {" "}
+                          {section.title.toUpperCase()}{" "}
+                        </span>
+                        <span
+                          style={{ color: section.color }}
+                          className="text-center text-[12px] font-bold"
+                        >
+                          &#x2022; {section.applications?.length}
+                        </span>
+                        {/* change this ml auto for 'md:'  for targeting the onClick - expand/collapse*/}
+                        <span className="ml-auto">
+                          <img src={`${section.cta}`} className="w-4 h-4" />
+                        </span>
+                      </div>
+                    ) : (
+                      <div
+                        style={{ backgroundColor: section.bgColor }}
+                        className={`flex w-fit p-2 items-center rounded-t-md  `}
                       >
-                        &#x2022; {section.applications?.length}
-                      </span>
-                      {/* change this ml auto for 'md:'  for targeting the onClick - expand/collapse*/}
-                      <span className="ml-auto">
-                        <img src={`${section.cta}`} className="w-4 h-4" />
-                      </span>
-                    </div>
+                        <span>
+                          <img
+                            src={`${section.icon}`}
+                            className="w-4 h-4 mb-0.5"
+                          />
+                        </span>
+                      </div>
+                    )}
 
                     {section.applications.map((application, index) => (
                       <Draggable
@@ -185,11 +226,17 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
                               <ExternalApplicationCard
                                 key={application.id}
                                 application={application}
+                                isExpanded={expandedSections.includes(
+                                  section.title
+                                )}
                               />
                             ) : (
                               <ApplicationCard
                                 key={application.id}
                                 application={application}
+                                isExpanded={expandedSections.includes(
+                                  section.title
+                                )}
                               />
                             )}
                           </div>
