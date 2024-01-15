@@ -91,7 +91,7 @@ export default function KanbanBoard() {
     <>
       <SearchBar />
       <DragDropContext onDragEnd={onDragEndHandler}>
-        <div className="flex flex-wrap lg:flex-nowrap justify-evenly lg:justify-normal px-2 m-auto">
+        <div className="flex flex-wrap lg:flex-nowrap justify-evenly lg:justify-normal px-3 sm:px-6 pb-6 m-auto">
           {currentBoard?.map((section) => {
             return (
               <Droppable key={section.id} droppableId={section.id}>

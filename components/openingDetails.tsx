@@ -24,8 +24,8 @@ const OpeningDetails: React.FC<OpeningDetailsProps> = ({ opening }) => {
     applications,
   } = opening;
   return (
-    <div className="md:h-44 bg-[#FAFBFC] border-b-[1px] border-[#E1E4E8]">
-      <div className="flex flex-col gap-2 md:gap-6 w-full p-2  lg:p-4">
+    <div className="md:h-44 flex flex-col justify-center bg-[#FAFBFC] border-b-[1px] border-[#E1E4E8]">
+      <div className="flex flex-col gap-2 md:gap-6 w-full p-4 sm:p-6">
         <div className="flex gap-2 justify-between">
           <div className="flex items-center">
             <span className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 border-2 border-[#E1E4E8] rounded-2xl">
