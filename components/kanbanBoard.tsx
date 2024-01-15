@@ -10,6 +10,7 @@ import ExternalApplicationCard from "./../components/externalApplicationCard";
 import { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { sections } from "@/utils/constants";
+import SearchBar from "./searchBar";
 
 export default function KanbanBoard() {
   //You can take this as props also
@@ -88,6 +89,7 @@ export default function KanbanBoard() {
 
   return (
     <>
+      <SearchBar />
       <DragDropContext onDragEnd={onDragEndHandler}>
         <div className="flex flex-wrap lg:flex-nowrap justify-evenly lg:justify-normal px-2 m-auto">
           {currentBoard?.map((section) => {

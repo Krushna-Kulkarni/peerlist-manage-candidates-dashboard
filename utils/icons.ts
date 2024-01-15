@@ -12,6 +12,7 @@ export const loom = "/navIcons/loom.svg";
 export const rightArrow = "/navIcons/right-arrow.svg";
 
 // Other Icons
+export const searchSmall = "icons/search-small.svg";
 export const verified = "/icons/verified.svg";
 export const peerlistIcon = "icons/peerlist.svg";
 export const p = "icons/Peerlist - jpeg 0.svg";
